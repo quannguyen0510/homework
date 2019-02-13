@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .compulsory {
+            background-color: aqua;
+            padding: 4px;
+        }
+
+        .normal {
+            padding: 4px;
+        }
+
+        textarea {
+            width: 250px;
+            height: 70px;
+            margin-top: 15px;
+        }
+
+        label {
+            display: inline-block;
+            width: 140px;
+            text-align: left;
+            padding-top: 15px;
+        }
+
+        .birth {
+            color: #c6bcbc;
+        }
+    </style>
+<script type="text/javascript">
+    checked = true;
+	function checkinput() {
+		if(document.getElementById("name").value==""){
+			document.getElementById("z-name").innerHTML="Chưa nhập tên*";
+			document.getElementById("z-name").style.color="red";
+			checked = false;
+		}
+		else {
+		    document.getElementById("z-name").innerHTML="";
+        }
+		if(document.getElementById("birthday").value==""){
+			document.getElementById("z-birthday").innerHTML="Chưa nhập ngày sinh*";
+			document.getElementById("z-birthday").style.color="red";
+            checked = false;
+		}
+		else if(!isDate(document.getElementById("birthday").value)){
+			document.getElementById("z-birthday").innerHTML="Ngày sinh không đúng chuẩn*";
+			document.getElementById("z-birthday").style.color="red";
+			checked = false;
+		}
+        else {
+            document.getElementById("z-birthday").innerHTML="";
+        }
+		if(document.getElementById("email").value==""){
+			document.getElementById("z-email").innerHTML="Chưa nhập email*";
+			document.getElementById("z-email").style.color="red";
+            checked = false;
+		}
+        else if(!isEmail(document.getElementById("email").value)){
+		    document.getElementById("z-email").innerHTML="Email không đúng chuẩn*";
+		    document.getElementById("z-email").style.color="red";
+		    checked = false;
+        }
+		else  {
+		    document.getElementById("z-email").innerHTML="";
+        }
+		if(document.getElementById("user").value==""){
+			document.getElementById("z-user").innerHTML="Chưa nhập tên sử dụng*";
+			document.getElementById("z-user").style.color="red";
+            checked = false;
+		}
+        else  {
+            document.getElementById("z-user").innerHTML="";
+        }
+		if(document.getElementById("password").value==""){
+			document.getElementById("z-password").innerHTML="Chưa nhập mật khẩu*";
+			document.getElementById("z-password").style.color="red";
+            checked = false;
+		}
+        else  {
+            document.getElementById("z-password").innerHTML="";
+        }
+		if(document.getElementById("repass").value==""){
+			document.getElementById("z-repass").innerHTML="Chưa nhập lại mật khẩu*";
+			document.getElementById("z-repass").style.color="red";
+            checked = false;
+		}
+		else if (password = document.getElementById("password").value!=document.getElementById("repass").value){
+		    document.getElementById("z-repass").innerHTML="Mật khẩu nhập lại chưa đúng*";
+		    document.getElementById("z-repass").style.color="red";
+        }
+        else  {
+            document.getElementById("z-repass").innerHTML="";
+        }
+	}
+    function myFunction() {
+        var str = document.getElementById("name").value;
+        str = str.trim();
+        str = str.replace(/\s+/g, " ");
+        str = str.replace(/\w\S*/g,
+            function (txt) {
+                return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+            }
+        );
+        document.getElementById("name").value = str;
+    }
+
+    function Enter(nextinput) {
+        if (window.event && window.event.keyCode == 13) {
+            nextinput.focus();
+            return false;
+        }
+        else
+            return true;
+    }
+	function isDate(d){
+		s = d.split('/');
+
+		if (s.length != 3) return false; 
+		if (isNaN(s[0]) || isNaN(s[1]) || isNaN(s[2])) return false;
+
+
+		day = parseInt(s[0]);
+		month = parseInt(s[1]);
+		year = parseInt(s[2]);
+
+
+		if (month > 12 || month < 1) return false;
+		if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12) {
+			if (day > 31) return false;
+		} else if (month == 2){
+			if (year%4 == 0 && year%100 != 0) {
+				if (day > 29) return false;
+			} else if (day > 28) return false;
+		} else if (day > 30) return false;
+
+		if (day < 1) return false;
+	
+		date = new Date();
+		if (year > date.getFullYear() || year < 1950) return false;
+
+		return true;
+	}
+    function focusBirthday() {
+	    if(document.getElementById("birthday").value=="nn/tt/nnnn"){
+	        document.getElementById("birthday").value="";
+	        document.getElementById("birthday").style.color="#000000";
+        }
+    }
+    function blurBirthday() {
+        if(document.getElementById("birthday").value==""){
+            document.getElementById("birthday").value="nn/tt/nnnn";
+            document.getElementById("birthday").style.color="#c6bcbc";
+            document.getElementById("birthday").style.backgroundColor="aqua";
+        }
+    }
+    function isEmail(email) {
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        if (!reg.test(email)) return false;
+        return true;
+    }
+    function convertBirthday(){
+	    var str=document.getElementById("birthday").value;
+	    str=str.replace(/^(\d\d)(\d)$/g,'$1/$2').replace(/^(\d\d\/\d\d)(\d+)$/g,'$1/$2').replace(/[^\d\/]/g,'');
+	    document.getElementById("birthday").value=str;
+    }
+</script>
+</head>
+<body>
+<form>
+    <label for="name">Họ tên:</label> <input class="compulsory" type="text" id="name" name="fullname"
+                                             onblur="myFunction()"
+                                             onkeyup="return Enter(form.address)" autofocus> <span id="z-name"></span><br/>
+
+    <label for="address">Địa chỉ:</label> <input class="normal" type="text" id="address" name="address"
+                                                 onkeyup="return Enter(form.male)"><span></span><br/>
+
+    <label>Giới tính:</label> <input type="radio" name="gender" id="male" onkeyup="return Enter(form.female)">Nam
+    <input type="radio" name="gender" id="female" onkeyup="return Enter(form.birthday)">Nữ<span></span><br>
+
+    <label for="birthday">Ngày sinh:</label> <input class="compulsory birth" type="text" id="birthday"
+                                                    name="birthday" value="nn/tt/nnnn" onfocus="focusBirthday()" onblur="blurBirthday()"
+                                                    onkeydown="convertBirthday()" onkeyup="return Enter(form.email)"> <span id="z-birthday"></span><br/>
+
+    <label for="email">Email:</label> <input class="compulsory" type="email" id="email" name="email"
+                                             onkeyup="return Enter(form.phone)"> <span id="z-email"></span><br/>
+
+    <label for="phone">Điện thoại:</label> <input class="normal" type="text" id="phone" name="phone"
+                                                  onkeyup="return Enter(form.courses)"><span></span><br/>
+
+    <label>Khóa đăng kí:</label> <input type="checkbox" name="courses" id="coures" onkeyup="return Enter(form.courses1)">Tiếng Anh
+    <input type="checkbox" name="courses1" id="coures1" onkeyup="return Enter(form.courses2)">Quản trị
+    <input type="checkbox" name="courses2" id="coures2" onkeyup="return Enter(form.user)">CNTT<span></span><br/>
+
+    <label for="user">Tên sử dụng:</label> <input class="compulsory" type="text" id="user" name="user"
+                                                  onkeyup="return Enter(form.password)"> <span id="z-user"></span><br/>
+
+    <label for="password">Mật khẩu:</label> <input class="compulsory" type="password" id="password" name="password"
+                                                   onkeyup="return Enter(form.repass)"> <span id="z-password"></span><br/>
+
+    <label for="repass">Gõ lại mật khẩu:</label> <input class="compulsory" type="password" id="repass" name="repass"
+                                                        onkeyup="return Enter(form.note)"> <span id="z-repass"></span><br/>
+    <label for="note">Ghi chú:</label> <textarea name="note" id="note"></textarea><span></span><br>
+</form>
+<label></label><input type="submit" name="accept" value="Chấp nhận" onclick="checkinput()">
+<input type="reset" name="skip" id="skip" value="Bỏ qua">
+
+
+
+</body>
+</html>

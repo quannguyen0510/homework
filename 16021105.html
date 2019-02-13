@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyWebsite</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body, html {
+            height: 100%;
+        }
+
+        #left {
+            display: inline;
+            float: left;
+            width: 400px;
+            background-color: #000000;
+            text-align: center;
+            font-weight: bold;
+            height: 723px;
+        }
+
+        #avatar {
+            margin-top: 50px;
+            vertical-align: middle;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+
+        ul.nav_bar {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .active {
+            text-decoration: underline !important;
+            color: #00d8ff !important;
+        }
+
+        ul.nav_bar li > a {
+            display: block;
+            color: #ffffff;
+            text-align: center;
+            padding: 25px;
+            text-decoration: none;
+            font-size: 15px;
+            text-transform: uppercase;
+        }
+
+        ul.nav_bar li > a:hover:not(.active) {
+            color: #00d8ff;
+        }
+
+        .info {
+            color: #00d8ff;
+            font-size: 18px;
+        }
+
+        .content {
+            width: calc(100% - 400px);
+            background: url(http://www.gamersdecide.com/sites/default/files/authors/u142550/soren_bjerg_alsantiago.jpg) no-repeat center center fixed;
+            position: relative;
+            background-size: cover;
+            height: 723px;
+            overflow: hidden;
+        }
+
+        #text {
+            position: absolute;
+            top: 40%;
+            left: 70%;
+            background-color: #000000;
+            padding: 20px;
+            font-family: "Playfair Display", Georgia, serif;
+            font-weight: bold;
+            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16);
+            border-radius: 10px;
+            color: white;
+        }
+
+        h3.style {
+            font-size: 25px !important;
+        }
+
+        #search {
+            position: absolute;
+            top: 8px;
+            right: 16px;
+        }
+    </style>
+</head>
+<body>
+<div id="left">
+    <div id="box">
+        <img id="avatar" src="data:image/jpeg;base64,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" alt="avatar">
+    </div>
+    <h3>Soren Bjerg Jergsen</h3>
+    <p class="info">Player from Denmark</p>
+    <ul class="nav_bar">
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="#news">Profile</a></li>
+        <li><a href="#contact">Story</a></li>
+        <li><a href="#Contact">Contact</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+    <p style="color:#ffffff">This page about <span class="info"> a genius gamer</span></p>
+    <p style="color:#ffffff">Create by <span class="info">Quan Nguyen</span></p>
+</div>
+<div class="content">
+    <div id="search">
+        <form class="search">
+            <input type="text" name="search">
+            <i class="fa fa-search"></i>
+    </form>
+</div>
+    <div id="text">
+        <h3 class="style">
+            Profile
+        </h3>
+        <p>
+            Name: Soren Bjerg Jergsen
+            <br>
+            Nationality: Denmark
+            <br>
+            Age: 26
+            <br>
+            Team: Team Solo Mid
+            <br>
+            Position: Mid laner
+        </p>
+    </div>
+</div>
+</body>
+</html>
